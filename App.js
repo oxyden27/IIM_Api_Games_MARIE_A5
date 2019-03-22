@@ -8,8 +8,10 @@ import textReducer from './Reducer'
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
-  Info: {screen: InfoScreen},
+  Info: {screen: InfoScreen, navigationOptions: {headerLeft: null}},
 });
+
+
 
 const store = createStore(textReducer);
 

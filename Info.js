@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Linking } from 'react-native';
+import { StyleSheet, Text, View, Linking, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -18,6 +18,8 @@ class Info extends React.Component {
             .then((response) => response.json())
             .then((responseJson) => {
 
+                AsyncStorage.setItem('nameGame', responseJson.name);
+
                 this.setState({
                     isLoading: false,
                     gameName: responseJson.name,
@@ -35,16 +37,23 @@ class Info extends React.Component {
                 console.error(error);
             });
     }
+
     render() {
         return (
-            <View style={styles.container}>
-                <Text h1>{this.state.gameName}</Text>
+            <View style={[styles.container, {width: this.state.w, height: this.state.h}]}>
+                <Button title="Retour à la liste" type="outline" onPress={() =>{
+                    this.props.navigation.state.params.onNavigateBack(this.state.gameName),
+                    this.props.navigation.goBack()
+                }} />
+                <Text h1 style={[styles.h1]}>{this.state.gameName}</Text>
                 <View>
-                    <Text>Players : {this.state.gamePlayers}</Text>
-                    <Text>Type : {this.state.gameType}</Text>
-                    <Text>Year : {this.state.gameYear}</Text>
-                    <Text>Description : {this.state.gameDescription}</Text>
-                    <Button title="Page wikipédia" type="outline" onPress={() => Linking.openURL(`${this.state.gameUrl}`)} />
+                    <Text style={[styles.text]}>Players : {this.state.gamePlayers}</Text>
+                    <Text style={[styles.text]}>Type : {this.state.gameType}</Text>
+                    <Text style={[styles.text]}>Year : {this.state.gameYear}</Text>
+                    <Text style={[styles.text]}>Description : {this.state.gameDescription}</Text>
+                    <View style={styles.container}>
+                        <Button style={styles.button} title="Page wikipédia" type="outline" onPress={() => Linking.openURL(`${this.state.gameUrl}`)} />
+                    </View>
                 </View>
             </View>
         );
@@ -55,8 +64,18 @@ export default Info;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#010930',
         alignItems: 'center',
         justifyContent: 'center',
+        color: '#eee',
+        padding: 30
     },
+    text: {
+        color: '#eee'
+    },
+    button: {
+        color: '#eee',
+        padding: 20,
+    },
+    h1: {}
 });

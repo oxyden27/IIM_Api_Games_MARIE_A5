@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19003,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 44164,
+  "expoServerNgrokUrl": "https://zv-gh2.anonymous.iim-api-games-marie-a5.exp.direct",
+  "packagerNgrokUrl": "https://packager.zv-gh2.anonymous.iim-api-games-marie-a5.exp.direct",
+  "ngrokPid": 44187,
   "webpackServerPort": null
 }
